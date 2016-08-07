@@ -8,7 +8,7 @@ FROM ubuntu:xenial
 MAINTAINER James Campbell
 RUN apt-get update
 ################## BEGIN INSTALLATION ######################
-RUN apt-get install install --yes tor openssh-server
+RUN apt-get install --yes tor openssh-server
 
 
 # Create hidden service folder
