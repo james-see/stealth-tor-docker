@@ -9,7 +9,7 @@ MAINTAINER James Campbell
 RUN apt-get update
 ################## BEGIN INSTALLATION ######################
 RUN apt-get install install --yes tor openssh-server
-ENTRYPOINT /bin/bash
+
 
 # Create hidden service folder
 RUN mkdir -p /var/lib/tor/ssh_onion_service/
@@ -32,12 +32,13 @@ RUN service ssh restart
 
 # Build examples of .ssh/config and /etc/tor/torrc
 RUN echo ""CONNECTION="$(cat /var/lib/tor/ssh_onion_service/hostname)" ONION="$(echo $CONNECTION | cut -d' ' -f1)"
-echo "# Add this to your .ssh/config in client side"
-echo "host hidden"
-echo -e '\thostname $ONION'
-echo -e '\tuser root'
-echo -e '\tproxyCommand /usr/local/bin/ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p'
-echo ""
-echo "Add this line to your /etc/tor/torrc on client side."
-echo "HidServAuth $CONNECTION"
-echo ""
+RUN echo "# Add this to your .ssh/config in client side"
+RUN echo "host hidden"
+RUN echo -e '\thostname $ONION'
+RUN echo -e '\tuser root'
+RUN echo -e '\tproxyCommand /usr/local/bin/ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p'
+RUN echo ""
+RUN echo "Add this line to your /etc/tor/torrc on client side."
+RUN echo "HidServAuth $CONNECTION"
+RUN echo ""
+ENTRYPOINT /bin/bash
