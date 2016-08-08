@@ -6,8 +6,17 @@ spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and ea
 
 ## WHAT I GOT WORKING
 
-1. server torrc correctly configured with `HiddenServiceAuthorityClient`
+1. server torrc correctly configured with HiddenServiceAuthorizeClient
+  ```
+  HiddenServiceAuthorizeClient stealth somerandom16charkey    
+  HiddenServiceDir /var/lib/tor/ssh_onion_service/   
+  HiddenServicePort 22 127.0.0.1:51900   
+  ```
 2. client torrc correctly configured with HidServAuth 
+  ```
+  HidServAuth blahblahblahserver.onion cookiekey # client somerandom16charkey
+  ```
+
 3. ssh configured with ~/.ssh/config and 
   ```
   host hidden2   
