@@ -7,10 +7,12 @@ spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and ea
 This will hopefully be like the following:
 
 ```
+$ mkdir ~/projects && cd ~/projects
+$ git clone https://github.com/jamesacampbell/stealth-tor-docker.git
 $ docker pull ubuntu:xenial
-$ cd ~/projects/github/stealth-tor-docker/server
+$ cd ~/projects/stealth-tor-docker/server
 $ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshserver .
-$ cd ~/projects/github/stealth-tor-docker/client
+$ cd ~/projects/stealth-tor-docker/client
 $ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshclient .
 ```
 then...
