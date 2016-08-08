@@ -4,6 +4,25 @@
 ## GOAL   
 spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and easily
 
+This will hopefully be like the following:
+
+```
+$ docker pull ubuntu:xenial
+$ cd ~/projects/github/stealth-tor-docker/server
+$ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshserver .
+$ cd ~/projects/github/stealth-tor-docker/client
+$ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshclient .
+```
+then...
+
+`docker run -ti torsshserver` running from anywhere that can run docker.
+
+then...
+
+`docker run -ti torsshclient` running from anywhere else that can run docker and you should be gtg.
+
+It obviously isn't there yet.
+
 ## WHAT I GOT WORKING
 
 1. server torrc correctly configured with HiddenServiceAuthorizeClient
