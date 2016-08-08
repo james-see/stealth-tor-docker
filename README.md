@@ -12,7 +12,9 @@ spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and ea
   
   HiddenServiceDir /var/lib/tor/ssh_onion_service/   
   
-  HiddenServicePort 22 127.0.0.1:51900   
+  HiddenServicePort 22 127.0.0.1:51900 
+  
+  HiddenServicePort 80 127.0.0.1:8099
   ```
 2. client torrc correctly configured with HidServAuth 
   ```
@@ -29,7 +31,7 @@ spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and ea
   
   Port 22 
   
-  user root   
+  user root   # (or whatever you set)
   
   hostname blahblahblahserver.onion   
   
@@ -42,8 +44,33 @@ spin up a new ubuntu based tor-enabled hidden ssh server & client quickly and ea
 _assuming Ubuntu 16x_
 
 `sudo apt-get install tor nginx openssh-server`
+
 `sudo nano /etc/ssh/sshd_config` and then change port to the one you use for torrc line in server
+
+`port 91854` 
+
+`AllowUsers root #or whatever`
+
+`PermitRootLogin no # recommended`
+
 `sudo service ssh restart`
+
+_for nginx setup_
+
+`sudo nano /etc/nginx/sites-available/blahblahblahserver.onion` then   
+
+```
+server {
+listen   127.0.0.1:8099;
+
+root /home/cjer/projects/lol/;
+index index.html index.htm;
+server_name qhzwfy24i22jchdw.onion;
+}
+```
+then `sudo nginx restart`
+
+if you have issues, `sudo nginx -t` is your best friendz...
 
 _ssh config for OSX_
 
@@ -52,9 +79,13 @@ host hidden1
         CheckHostIP no
         Compression yes
         Port 22
-        user jc
+        user root # (or whatever you set)
         hostname blahblahblahserver.onion
         proxyCommand nc -x 127.0.0.1:9050 -X 5 %h %p
 ```
 
 _if nc command doesn't work then `brew install nmap --upgrade`_
+
+_the command `ssh hidden1` should connect you to server and ask for password_
+
+### !!!! DONT FORGET TO SET HARD PASS FOR SSH USER !!!!
