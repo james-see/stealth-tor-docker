@@ -1,4 +1,7 @@
 # stealth-tor-docker
+
+![stealth-tor-docker-logo](https://cloud.githubusercontent.com/assets/616585/17494422/96c25304-5d82-11e6-9132-8cf64a2bbdb6.png)
+
 ## NOT WORKING YET DO NOT USE
 
 ## GOAL   
