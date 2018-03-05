@@ -14,7 +14,7 @@ $ mkdir ~/projects && cd ~/projects
 $ git clone https://github.com/jamesacampbell/stealth-tor-docker.git
 $ docker pull ubuntu:xenial
 $ cd ~/projects/stealth-tor-docker/server
-$ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshserver .
+$ sudo docker build --build-arg SSHPORT=95000 --build-arg USER=adm -t torsshserver .
 $ cd ~/projects/stealth-tor-docker/client
 $ sudo docker build --build-arg SSHPORT=95000 USER=adm -t torsshclient .
 ```
